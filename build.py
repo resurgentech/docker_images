@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--container', help='Container type', type=str)
     parser.add_argument('--os_name', help='os version to build', type=str)
-    parser.add_argument('--push', help='push images to hub.docker.com', type=str)
+    parser.add_argument('--push', help='push images to hub.docker.com', action='store_true')
     parser.add_argument('--clean', help='remove images locally', action='store_true')
     parser.add_argument('--tag', help='tag version', type=str)
     parser.add_argument('--org', help='organization', type=str, default='resurgentech')
@@ -32,7 +32,7 @@ if __name__ == '__main__':
         sys.exit(0)
 
     # Do push actions if request
-    if args.push is not None:
+    if args.push:
         if args.tag is not None:
             docker_push(args.tag)
             sys.exit(0)
