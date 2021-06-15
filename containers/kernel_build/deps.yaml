@@ -1,5 +1,9 @@
 - os_name: centos8
   depends: dev_base
+- os_name: debian10
+  depends: dev_base
+- os_name: fedora34
+  depends: dev_base
 - os_name: ubuntu2004
   depends: dev_base
 - os_name: popos2004

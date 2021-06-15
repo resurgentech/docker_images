@@ -1,0 +1,9 @@
+FROM resurgentech/base-fedora34:latest
+
+RUN dnf groupinstall -y "Development Tools" && \
+    dnf install -y bc newt slang xmlto rsync cmake net-tools && \
+    dnf install -y rpm-build dpkg-dev && \
+    dnf clean all && \
+    rm -rf /var/cache/yum
+
+COPY docker_image_history.* /etc
