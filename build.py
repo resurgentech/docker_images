@@ -21,6 +21,11 @@ if __name__ == '__main__':
 
     # Create list of targeted container types
     dfd = DockerfileDiscovery(org=args.org, container=args.container, os_name=args.os_name)
+    if dfd.filter_failure:
+        print("")
+        print("")
+        parser.print_help()
+        parser.exit()
 
     # Clean up images
     if args.clean:

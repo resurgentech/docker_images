@@ -15,18 +15,28 @@ class DockerfileDiscovery:
         self.discover_resolve_dependants()
         self.jobs = []
         self.reverse_deps = False
-        self.filter_data(container, os_name)
+        self.filter_failure = self.filter_data(container, os_name)
 
     def filter_data(self, container_name, os_name):
         if container_name is not None:
             tempdata = []
             container = self.get_container(container_name)
+            if container is None:
+                print("ERROR: Can't find container {}".format(container_name))
+                return True
             tempdata.append(container)
             self.data = tempdata
         if os_name is not None:
+            is_os_name_missing = True
             for c in self.data:
                 df = self.get_dockerfile(c['name'], os_name)
+                if df is not None:
+                    is_os_name_missing = False
                 c['dockerfiles'] = [df]
+            if is_os_name_missing:
+                print("ERROR: Can't find OS named {} in container {}".format(os_name, container_name))
+                return True
+        return False
 
     def setup_jobs(self):
         for c in self.data:

@@ -2,7 +2,7 @@ FROM resurgentech/dev_base-popos2004:latest
 
 RUN apt-get update --fix-missing && \
     apt-get install -y libncurses-dev libssl-dev libelf-dev libudev-dev \
-                       libpci-dev libiberty-dev && \
+                       libpci-dev libiberty-dev equivs && \
     apt-get install -y dkms && \
     DEBIAN_FRONTEND=noninteractive apt-get build-dep -y linux && \
     apt-get clean && \
