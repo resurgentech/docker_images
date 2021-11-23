@@ -27,12 +27,17 @@ class DockerfileDiscovery:
             tempdata.append(container)
             self.data = tempdata
         if os_name is not None:
+            remove_list = []
             is_os_name_missing = True
             for c in self.data:
                 df = self.get_dockerfile(c['name'], os_name)
                 if df is not None:
                     is_os_name_missing = False
-                c['dockerfiles'] = [df]
+                    c['dockerfiles'] = [df]
+                else:
+                    remove_list.append(c)
+            for c in remove_list:
+                self.data.remove(c)
             if is_os_name_missing:
                 print("ERROR: Can't find OS named {} in container {}".format(os_name, container_name))
                 return True
@@ -222,7 +227,10 @@ class DockerfileDiscovery:
         if len(self.jobs) == 0:
             raise StopIteration
         c = self.jobs[0]['name']
-        o = self.jobs[0]['dockerfiles'][0]['os_name']
+        try:
+            o = self.jobs[0]['dockerfiles'][0]['os_name']
+        except:
+            o = None
         container_name, os_name = self.get_next_job(c, o)
         self.delete_dockerfile_from_jobs(container_name, os_name)
         return container_name, os_name

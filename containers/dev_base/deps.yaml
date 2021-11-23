@@ -1,5 +1,7 @@
 - os_name: centos8
   depends: base
+- os_name: rockylinux8
+  depends: base
 - os_name: debian10
   depends: base
 - os_name: fedora34
