@@ -1,0 +1,2 @@
+- os_name: rockylinux8
+  depends: kernel_build
