@@ -1,2 +1,4 @@
 - os_name: rockylinux8
   depends: kernel_build
+- os_name: ubuntu2004
+  depends: kernel_build
