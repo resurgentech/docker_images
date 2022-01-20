@@ -45,7 +45,7 @@ def metadata_create(workdir, org, dockerfile, imagename):
 
 def metadata_image_tag(ts):
     hash = git_short_hash()
-    tag = "{}-{}".format(hash, ts)
+    tag = "{}-{}".format(ts, hash)
     return tag
 
 
