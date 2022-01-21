@@ -81,4 +81,4 @@ def docker_get_images(repo):
 
 def docker_delete_image(image):
     cmd = "docker image rm -f {}".format(image)
-    run_cmd(cmd, verbose=False, live_output=False)
+    run_cmd(cmd, verbose=False, live_output=False, allow_errors=True)

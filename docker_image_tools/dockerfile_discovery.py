@@ -182,10 +182,11 @@ class DockerfileDiscovery:
         docker_pull(baseimage, allow_errors=allow_errors)
 
     def clean(self, repo):
-        images = docker_get_images(repo)
-        for image in images:
-            image_hash = image['IMAGE']
-            docker_delete_image(image_hash)
+        for i in range(10):
+            images = docker_get_images(repo)
+            for image in images:
+                image_hash = image['IMAGE']
+                docker_delete_image(image_hash)
 
     def push(self, repo):
         images = docker_get_images(repo)

@@ -9,7 +9,7 @@ RUN dnf install -y rpmdevtools rpm-build redhat-rpm-config && \
                    "perl(ExtUtils::Embed)" && \
     dnf install -y python3 python3-devel python3-docutils python3-sphinx && \
     dnf install -y clang dwarves kabi-dw libbabeltrace-devel libbpf-devel \
-                   libcap-ng-devel libmnl-devel llvm && \
+                   libcap-ng-devel libmnl-devel llvm bpftool && \
     python3 -m pip install -U pip && \
     dnf clean all && \
     rm -rf /var/cache/yum
