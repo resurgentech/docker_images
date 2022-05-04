@@ -1,7 +1,7 @@
 FROM resurgentech/dev_base-ubuntu2204:latest
 
 RUN apt-get update --fix-missing && \
-    apt-get install -y libncurses-dev libssl-dev libelf-dev libudev-dev \
+    apt-get install -y libncurses-dev libssl-dev libelf-dev libudev-dev=249.11-0ubuntu3.1 \
                        libpci-dev libiberty-dev equivs dwarves && \
     apt-get install -y dkms && \
     DEBIAN_FRONTEND=noninteractive apt-get build-dep -y linux && \
