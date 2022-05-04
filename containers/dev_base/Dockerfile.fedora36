@@ -1,4 +1,4 @@
-FROM resurgentech/base-centos8:latest
+FROM resurgentech/base-fedora36:latest
 
 RUN dnf groupinstall -y "Development Tools" && \
     dnf install -y bc newt slang xmlto rsync cmake net-tools && \

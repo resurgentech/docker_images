@@ -1,0 +1,9 @@
+FROM fedora:35
+
+RUN dnf clean all && \
+    dnf update -y && \
+    dnf install -y dnf-plugins-core && \
+    dnf clean all && \
+    rm -rf /var/cache/yum
+
+COPY docker_image_history.* /etc
