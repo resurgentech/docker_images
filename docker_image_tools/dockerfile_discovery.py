@@ -51,6 +51,8 @@ class DockerfileDiscovery:
                     continue
                 nc[k] = v
             nc['dockerfiles'] = self.get_dockerfiles(c['name'])
+            if len(nc['dockerfiles']) == 0:
+                continue
             self.jobs.append(nc)
 
     def delete_dockerfile_from_jobs(self, container_name, os_name):
