@@ -30,6 +30,7 @@ if __name__ == '__main__':
     # Clean up images
     if args.clean:
         dfd.reverse_deps = True
+        dfd.sort_containers(reverse=True)
         for container_name, os_name in dfd:
             print("container_name='{}' os_name='{}".format(container_name, os_name))
             repo = metadata_image_repo(args.org, container_name, os_name)

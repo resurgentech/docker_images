@@ -1,12 +1,26 @@
-- os_name: centos8
-  depends: dev_base
 - os_name: rockylinux8
+  depends: dev_base
+- os_name: almalinux8
   depends: dev_base
 - os_name: debian10
   depends: dev_base
+- os_name: debian11
+  depends: dev_base
+- os_name: debian12
+  depends: dev_base
 - os_name: fedora34
   depends: dev_base
+- os_name: fedora35
+  depends: dev_base
+- os_name: fedora36
+  depends: dev_base
+- os_name: fedora37
+  depends: dev_base
 - os_name: ubuntu2004
+  depends: dev_base
+- os_name: ubuntu2110
+  depends: dev_base
+- os_name: ubuntu2204
   depends: dev_base
 - os_name: popos2004
   depends: dev_base

@@ -8,11 +8,16 @@ def get_by_name(data_list, key_name, name):
     return None
 
 
+def sort_score(a):
+    return a['score']
+
+
 class DockerfileDiscovery:
     def __init__(self, org=None, container=None, os_name=None, searchdir="./containers"):
         self.org = org
         self.data = self.discover_all(searchdir)
         self.discover_resolve_dependants()
+        self.sort_containers()
         self.jobs = []
         self.reverse_deps = False
         self.filter_failure = self.filter_data(container, os_name)
@@ -98,6 +103,31 @@ class DockerfileDiscovery:
                 if df['os_name'] == dep['os_name']:
                     df['depends'] = dep['depends']
 
+    def sort_containers(self, reverse=False):
+        deplist = []
+        for c in self.data:
+            name = c['name']
+            dps = []
+            dpts = []
+            for df in c['dockerfiles']:
+                dp = df.get('depends', None)
+                if dp is not None:
+                    if dp not in dps:
+                        dps.append(dp)
+                dpt = df.get('dependant', None)
+                if dpt is not None:
+                    if dpt not in dpts:
+                        dpts.append(dpt)
+            sc = dps + [name] + dpts
+            for n in sc:
+                if n not in deplist:
+                    deplist.append(n)
+        for c in self.data:
+            name = c['name']
+            c['score'] = deplist.index(name)
+        self.data.sort(key=sort_score, reverse=reverse)
+        return self.data
+
     def discover_all(self, searchdir):
         subfolders = [f.path for f in os.scandir(searchdir) if f.is_dir()]
         containers = []
@@ -181,7 +211,11 @@ class DockerfileDiscovery:
 
     def pull_base_image(self, container_name, os_name, allow_errors=False):
         baseimage = self.get_base_image(container_name, os_name)
-        docker_pull(baseimage, allow_errors=allow_errors)
+        try:
+            docker_image_inspect(baseimage)
+        except:
+            print("docker image doesn't exist")
+            docker_pull(baseimage, allow_errors=allow_errors)
 
     def clean(self, repo):
         for i in range(10):
