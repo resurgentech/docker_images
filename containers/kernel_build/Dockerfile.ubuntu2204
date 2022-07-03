@@ -10,11 +10,11 @@ RUN apt-get update --fix-missing && \
                       libudev-dev \
                       libpci-dev \
                       libiberty-dev \
-                      libbfd-dev \
                       libperl-dev \
-                      libpython-dev \
-                      libcrypto-dev \
                       libzstd-dev \
+                      libcrypto++-dev \
+                      libpython3-dev \
+                      binutils-dev \
                       equivs \
                       dwarves \
                       dkms && \
