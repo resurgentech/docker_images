@@ -25,6 +25,9 @@ RUN apt-get update --fix-missing && \
                         libbabeltrace-dev \
                         libbabeltrace-ctf-dev \
                         libpython2-dev \
+                        python3-pip \
+                        clang \
+                        llvm \
                          && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
