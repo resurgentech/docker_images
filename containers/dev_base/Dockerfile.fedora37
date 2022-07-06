@@ -1,8 +1,17 @@
 FROM resurgentech/base-fedora37:latest
 
 RUN dnf groupinstall -y "Development Tools" && \
-    dnf install -y bc newt slang xmlto rsync cmake net-tools && \
-    dnf install -y rpm-build dpkg-dev zstd && \
+    dnf install -y  bc \
+                    newt \
+                    slang \
+                    xmlto \
+                    rsync \
+                    cmake \
+                    net-tools \
+                    rpm-build \
+                    dpkg-dev \
+                    zstd \
+                    && \
     dnf clean all && \
     rm -rf /var/cache/yum
 

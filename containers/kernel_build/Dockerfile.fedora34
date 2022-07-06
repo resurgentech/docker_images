@@ -1,13 +1,31 @@
 FROM resurgentech/dev_base-fedora34:latest
 
-RUN dnf install -y rpmdevtools rpm-build redhat-rpm-config && \
-    dnf install -y audit-libs-devel binutils-devel elfutils-devel \
-                   elfutils-libelf-devel java-devel libcap-devel \
-                   ncurses-devel newt-devel numactl-devel openssl-devel \
-                   pciutils-devel xz-devel zlib-devel && \
-    dnf install -y perl-interpreter perl-devel perl-generators perl-Carp \
-                   "perl(ExtUtils::Embed)" && \
-    dnf install -y python3 python3-devel python3-docutils python3-sphinx && \
+RUN dnf install -y  rpmdevtools \
+                    rpm-build \
+                    redhat-rpm-config \
+                    audit-libs-devel \
+                    binutils-devel \
+                    elfutils-devel \
+                    elfutils-libelf-devel \
+                    java-devel \
+                    libcap-devel \
+                    ncurses-devel \
+                    newt-devel \
+                    numactl-devel \
+                    openssl-devel \
+                    pciutils-devel \
+                    xz-devel \
+                    zlib-devel \
+                    perl-interpreter \
+                    perl-devel \
+                    perl-generators \
+                    perl-Carp \
+                    "perl(ExtUtils::Embed)" \
+                    python3 \
+                    python3-devel \
+                    python3-docutils \
+                    python3-sphinx \
+                    && \
     python3 -m pip install -U pip && \
     dnf clean all && \
     rm -rf /var/cache/yum
