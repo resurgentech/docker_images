@@ -24,6 +24,4 @@ RUN apt-get update --fix-missing && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN ln -s /usr/bin/python3-config /usr/bin/python-config
-
 COPY docker_image_history.* /etc
