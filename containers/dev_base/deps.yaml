@@ -24,3 +24,5 @@
   depends: base
 - os_name: popos2004
   depends: base
+- os_name: amazonlinux2
+  depends: base
