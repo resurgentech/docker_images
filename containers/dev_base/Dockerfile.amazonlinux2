@@ -1,7 +1,9 @@
-FROM resurgentech/base-fedora36:latest
+FROM resurgentech/base-amazonlinux2:latest
 
-RUN dnf groupinstall -y "Development Tools" && \
-    dnf install -y  bc \
+RUN yum clean all && \
+    yum update -y && \
+    yum groupinstall -y "Development Tools" && \
+    yum install -y  bc \
                     newt \
                     slang \
                     xmlto \
@@ -12,7 +14,7 @@ RUN dnf groupinstall -y "Development Tools" && \
                     dpkg-dev \
                     zstd \
                     && \
-    dnf clean all && \
+    yum clean all && \
     rm -rf /var/cache/yum
 
 COPY docker_image_history.* /etc

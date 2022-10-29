@@ -24,3 +24,5 @@
   depends: dev_base
 - os_name: popos2004
   depends: dev_base
+- os_name: amazonlinux2
+  depends: dev_base

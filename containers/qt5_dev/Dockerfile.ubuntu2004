@@ -1,7 +1,9 @@
 FROM resurgentech/kernel_build-ubuntu2004:latest
 
 RUN apt-get update --fix-missing && \
-    apt-get install -y qt5-default cmake && \
+    apt-get install -y  qt5-default \
+                        cmake \
+                        && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

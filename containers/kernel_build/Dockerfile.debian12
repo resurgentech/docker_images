@@ -1,13 +1,21 @@
 FROM resurgentech/dev_base-debian12:latest
 
 RUN apt-get update --fix-missing && \
-apt-get install -y libncurses-dev libssl-dev libelf-dev libudev-dev \
-                   libpci-dev libiberty-dev equivs dwarves \
-                   bison cpio debhelper dh-exec dh-python flex \
-                   python3 quilt xz-utils dvipng graphviz patchutils \
-                   python3-sphinx python3-sphinx-rtd-theme \
-                   texlive-latex-base texlive-latex-extra && \
-    apt-get install -y dkms && \
+    DEBIAN_FRONTEND=noninteractive apt-get build-dep -y linux && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN apt-get update --fix-missing && \
+    apt-get install -y  libzstd-dev \
+                        binutils-dev \
+                        equivs \
+                        systemtap-sdt-dev \
+                        python3-pip \
+                        clang \
+                        llvm \
+                        && \
+    python3 -m pip install python-config && \
+    ln -s /usr/bin/python3-config /usr/bin/python-config && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
