@@ -1,0 +1,110 @@
+---
+ansible_url: https://github.com/resurgentech/ansible.git
+templates:
+  distros:
+    debian_default:
+      containers:
+        base:
+          template: base.debian.j2
+          base_image: root_image
+        dev_base:
+          template: ansible.debian.j2
+          playbook: playbook-container-dev_base.yml
+        kernel_build:
+          template: ansible.debian.j2
+          playbook: playbook-container-kernel_build.yml
+    fedora_default:
+      containers:
+        base:
+          template: base.fedora.j2
+          base_image: root_image
+        dev_base:
+          template: ansible.fedora.j2
+          playbook: playbook-container-dev_base.yml
+        kernel_build:
+          template: ansible.fedora.j2
+          playbook: playbook-container-kernel_build.yml
+    ubuntu_default:
+      containers:
+        base:
+          template: base.ubuntu.j2
+          base_image: root_image
+        dev_base:
+          template: ansible.ubuntu.j2
+          playbook: playbook-container-dev_base.yml
+        kernel_build:
+          template: ansible.ubuntu.j2
+          playbook: playbook-container-kernel_build.yml
+    rockylinux_default:
+      containers:
+        base:
+          template: base.rockylinux.j2
+          base_image: root_image
+        dev_base:
+          template: ansible.rockylinux.j2
+          playbook: playbook-container-dev_base.yml
+        kernel_build:
+          template: ansible.rockylinux.j2
+          playbook: playbook-container-kernel_build.yml
+    almalinux_default:
+      containers:
+        base:
+          template: base.almalinux.j2
+          base_image: root_image
+        dev_base:
+          template: ansible.almalinux.j2
+          playbook: playbook-container-dev_base.yml
+        kernel_build:
+          template: ansible.almalinux.j2
+          playbook: playbook-container-kernel_build.yml
+    amazonlinux2_default:
+      containers:
+        base:
+          template: base.amazonlinux2.j2
+          base_image: root_image
+        dev_base:
+          template: ansible.amazonlinux2.j2
+          playbook: playbook-container-dev_base.yml
+        kernel_build:
+          template: ansible.amazonlinux2.j2
+          playbook: playbook-container-kernel_build.yml
+distros:
+  debian10:
+    root_image: debian:10
+    template: debian_default
+  debian11:
+    root_image: debian:11
+    template: debian_default
+  debian12:
+    root_image: debian:bookworm
+    template: debian_default
+  fedora34:
+    root_image: fedora:34
+    template: fedora_default
+  fedora35:
+    root_image: fedora:35
+    template: fedora_default
+  fedora36:
+    root_image: fedora:36
+    template: fedora_default
+  fedora37:
+    root_image: fedora:37
+    template: fedora_default
+  ubuntu2004:
+    root_image: ubuntu:20.04
+    template: ubuntu_default
+  ubuntu2110:
+    root_image: ubuntu:21.10
+    template: ubuntu_default
+  ubuntu2204:
+    root_image: ubuntu:22.04
+    template: ubuntu_default
+  rockylinux8:
+    root_image: rockylinux:8
+    template: rockylinux_default
+  almalinux8:
+    root_image: almalinux:8.5
+    template: almalinux_default
+  amazonlinux2:
+    root_image: amazonlinux:2-with-sources
+    template: amazonlinux2_default

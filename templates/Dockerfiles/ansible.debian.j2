@@ -1,0 +1,13 @@
+FROM {{ base_image }}
+
+# Running ansible playbook
+RUN apt-get update --fix-missing && \
+    DEBIAN_FRONTEND=noninteractive \
+    cd /tmp && \
+    git clone {{ ansible_url }} ansible && \
+    cd /tmp/ansible && \
+    ansible-playbook --connection=local -e 'ansible_python_interpreter=/usr/bin/python3' -i inventory-localhost.yml {{ playbook }} && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY docker_image_history.* /etc

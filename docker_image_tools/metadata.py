@@ -32,8 +32,7 @@ def metadata_make_for_baseimage(org, baseimage):
     return metadata
 
 
-def metadata_create(workdir, org, dockerfile, imagename):
-    baseimage = dockerfile_get_base_image(dockerfile)
+def metadata_create(workdir, org, baseimage, imagename):
     metadata = metadata_make_for_baseimage(org, baseimage)
     new_image = {}
     new_image['imagename'] = imagename
