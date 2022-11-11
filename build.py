@@ -12,7 +12,7 @@ def read_config(args):
     config = []
 
     # Check for basic sections in config file
-    for a in ['ansible_url', 'distros', 'templates']:
+    for a in ['ansible', 'distros', 'templates']:
         if rawconfig.get(a, None) is None:
             success = False
             print("Config file '{}' is missing '{}'".format(args.config, a))
@@ -22,7 +22,7 @@ def read_config(args):
         sys.exit(1)
 
     # Merge in templates and update the containers
-    default_ansible_url = rawconfig['ansible_url']
+    default_ansible = rawconfig['ansible']
     distro_templates = rawconfig['templates']['distros']
     for distro_name, distro_data in rawconfig['distros'].items():
         # Skip out when we specify distro
@@ -51,10 +51,6 @@ def read_config(args):
             print("Skipping distro '{}' in config file '{}' is missing 'containers'".format(distro_name, args.config))
             continue
         for i, container_name in enumerate(a['containers']):
-            # Skip out when we specify container
-            if args.container is not None:
-                if args.container != container_name:
-                    continue
             container_data = a['containers'][container_name]
             # Base container is a special case where we specify it's base_image upfront
             if container_data.get('base_image', None) is not None:
@@ -68,8 +64,15 @@ def read_config(args):
                 container_data['base_image'] = "{}/{}-{}:latest".format(args.org, last_container_name, distro_name)
             container_data['image'] = "{}/{}-{}".format(args.org, container_name, distro_name)
             # Adding ansible_url
-            if container_data.get('ansible_url', None) is None:
-                container_data['ansible_url'] = default_ansible_url
+            if container_data.get('ansible', None) is None:
+                container_data['ansible'] = json.loads(json.dumps(default_ansible))
+        for container_name in list(a['containers'].keys()):
+            # Skip out when we specify container
+            if args.container is not None:
+                if args.container != container_name:
+                    del a['containers'][container_name]
+                    continue
+
         config.append(a)
     return config
 
@@ -100,13 +103,13 @@ if __name__ == '__main__':
     parser.add_argument('--container', help='Container type', type=str)
     parser.add_argument('--distro', help='os version to build', type=str)
     parser.add_argument('--clean', help='remove images locally', action='store_true')
+    parser.add_argument('--no_push', help='Do not push images', action='store_true')
     parser.add_argument('--org', help='organization', type=str, default='resurgentech')
     args = parser.parse_args()
 
     # Create list of targeted container types
     distros = read_config(args)
     print(yaml.dump(distros))
-    sys.exit(0)
 
     # Clean up images
     if args.clean:
@@ -142,6 +145,7 @@ if __name__ == '__main__':
             docker_tag(image, tag, 'latest')
 
             # Push
-            docker_push_images(image)
+            if not args.no_push:
+                docker_push_images(image)
             docker_cleanup_images(start_images)
 

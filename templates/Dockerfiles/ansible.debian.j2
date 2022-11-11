@@ -2,10 +2,10 @@ FROM {{ base_image }}
 
 # Running ansible playbook
 RUN apt-get update --fix-missing && \
-    DEBIAN_FRONTEND=noninteractive \
     cd /tmp && \
-    git clone {{ ansible_url }} ansible && \
+    git clone {{ ansible['url'] }} ansible && \
     cd /tmp/ansible && \
+    git checkout {{ ansible['branch'] }} && \
     ansible-playbook --connection=local -e 'ansible_python_interpreter=/usr/bin/python3' -i inventory-localhost.yml {{ playbook }} && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

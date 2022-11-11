@@ -1,5 +1,7 @@
 ---
-ansible_url: https://github.com/resurgentech/ansible.git
+ansible:
+  url: https://github.com/resurgentech/ansible.git
+  branch: testing2
 templates:
   distros:
     debian_default:
@@ -19,10 +21,10 @@ templates:
           template: base.fedora.j2
           base_image: root_image
         dev_base:
-          template: ansible.fedora.j2
+          template: ansible.redhat.j2
           playbook: playbook-container-dev_base.yml
         kernel_build:
-          template: ansible.fedora.j2
+          template: ansible.redhat.j2
           playbook: playbook-container-kernel_build.yml
     ubuntu_default:
       containers:
@@ -30,21 +32,24 @@ templates:
           template: base.ubuntu.j2
           base_image: root_image
         dev_base:
-          template: ansible.ubuntu.j2
+          template: ansible.debian.j2
           playbook: playbook-container-dev_base.yml
         kernel_build:
-          template: ansible.ubuntu.j2
+          template: ansible.debian.j2
           playbook: playbook-container-kernel_build.yml
+        qt5_dev:
+          template: ansible.debian.j2
+          playbook: playbook-container-qt5_dev.yml
     rockylinux_default:
       containers:
         base:
           template: base.rockylinux.j2
           base_image: root_image
         dev_base:
-          template: ansible.rockylinux.j2
+          template: ansible.redhat.j2
           playbook: playbook-container-dev_base.yml
         kernel_build:
-          template: ansible.rockylinux.j2
+          template: ansible.redhat.j2
           playbook: playbook-container-kernel_build.yml
     almalinux_default:
       containers:
@@ -52,10 +57,10 @@ templates:
           template: base.almalinux.j2
           base_image: root_image
         dev_base:
-          template: ansible.almalinux.j2
+          template: ansible.redhat.j2
           playbook: playbook-container-dev_base.yml
         kernel_build:
-          template: ansible.almalinux.j2
+          template: ansible.redhat.j2
           playbook: playbook-container-kernel_build.yml
     amazonlinux2_default:
       containers:
@@ -92,9 +97,6 @@ distros:
     template: fedora_default
   ubuntu2004:
     root_image: ubuntu:20.04
-    template: ubuntu_default
-  ubuntu2110:
-    root_image: ubuntu:21.10
     template: ubuntu_default
   ubuntu2204:
     root_image: ubuntu:22.04

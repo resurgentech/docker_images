@@ -1,8 +1,11 @@
 FROM {{ base_image }}
 
+# Update basic system packages
 RUN dnf clean all && \
     dnf update -y && \
     dnf install -y dnf-plugins-core && \
+    dnf install -y git && \
+    dnf install -y ansible && \
     dnf clean all && \
     rm -rf /var/cache/yum
 
