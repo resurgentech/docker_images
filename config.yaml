@@ -73,6 +73,9 @@ templates:
         kernel_build:
           template: ansible.amazonlinux2.j2
           playbook: playbook-container-kernel_build.yml
+        qt5_dev:
+          template: ansible.amazonlinux2.j2
+          playbook: playbook-container-qt5_dev.yml
 distros:
   debian10:
     root_image: debian:10
