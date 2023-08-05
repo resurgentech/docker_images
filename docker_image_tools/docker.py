@@ -3,7 +3,7 @@ import json
 
 
 def docker_run(cmd, imagename):
-    cmdline = "docker run -it --rm {} {}".format(imagename, cmd)
+    cmdline = "docker run -i --rm {} {}".format(imagename, cmd)
     exitcode, out, err = run_cmd(cmdline, allow_errors=True, verbose=True, live_output=True)
     return exitcode, out, err
 
