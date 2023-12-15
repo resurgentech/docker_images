@@ -54,7 +54,7 @@ templates:
     almalinux_default:
       containers:
         base:
-          template: base.almalinux.j2
+          template: base.rockylinux.j2
           base_image: root_image
         dev_base:
           template: ansible.redhat.j2
@@ -107,9 +107,9 @@ distros:
   rockylinux8:
     root_image: rockylinux:8
     template: rockylinux_default
-  # almalinux8:
-  #   root_image: almalinux:8.5
-  #   template: almalinux_default
+  almalinux8:
+     root_image: almalinux:8.5
+     template: almalinux_default
   amazonlinux2:
     root_image: amazonlinux:2-with-sources
     template: amazonlinux2_default
