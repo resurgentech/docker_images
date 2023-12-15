@@ -107,9 +107,9 @@ distros:
   rockylinux8:
     root_image: rockylinux:8
     template: rockylinux_default
-  almalinux8:
-    root_image: almalinux:8.5
-    template: almalinux_default
+  # almalinux8:
+  #   root_image: almalinux:8.5
+  #   template: almalinux_default
   amazonlinux2:
     root_image: amazonlinux:2-with-sources
     template: amazonlinux2_default
