@@ -1,14 +1,22 @@
-FROM debian:10
+FROM {{ base_image }}
 
+# Update basic system packages, adds src packages repos
 RUN apt-get update --fix-missing && \
     cp /etc/apt/sources.list /etc/apt/sources.list~ && \
     apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get install -y software-properties-common && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y git && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y ansible && \
     cp /etc/apt/sources.list /etc/apt/sources.list~ && \
     sed -Ei 's/^deb /deb-src /' /etc/apt/sources.list~ && \
     cat /etc/apt/sources.list~ | grep deb-src >> /etc/apt/sources.list && \
     apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get upgrade -y --allow-downgrades && \
+    DEBIAN_FRONTEND=noninteractive \
     apt-get install -y apt-utils && \
     rm /etc/apt/sources.list~ && \
     apt-get clean && \

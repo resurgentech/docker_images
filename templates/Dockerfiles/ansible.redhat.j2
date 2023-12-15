@@ -1,0 +1,14 @@
+FROM {{ base_image }}
+
+# Running ansible playbook
+RUN dnf clean all && \
+    dnf update -y && \
+    cd /tmp && \
+    git clone {{ ansible['url'] }} ansible && \
+    cd /tmp/ansible && \
+    git checkout {{ ansible['branch'] }} && \
+    ansible-playbook --connection=local -e 'ansible_python_interpreter=/usr/bin/python3' -i inventory-localhost.yml {{ playbook }} && \
+    dnf clean all && \
+    rm -rf /var/cache/yum /tmp/*
+
+COPY docker_image_history.* /etc

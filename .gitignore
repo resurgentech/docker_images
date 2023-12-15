@@ -1,4 +1,5 @@
 /.idea
 /venv
+/build
 __pycache__
 docker_image_history.*
