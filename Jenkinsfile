@@ -7,6 +7,7 @@ pipeline {
       steps {
         git branch: 'ansible',
           url: 'https://github.com/resurgentech/docker_images.git'
+        sh './build.py  --clean'
         sh './build.py  --distro ubuntu2004'
       }
     }
@@ -15,6 +16,7 @@ pipeline {
       steps {
         git branch: 'ansible',
           url: 'https://github.com/resurgentech/docker_images.git'
+        sh './build.py  --clean'
         sh './build.py  --distro ubuntu2204'
       }
     }
@@ -23,6 +25,7 @@ pipeline {
       steps {
         git branch: 'ansible',
           url: 'https://github.com/resurgentech/docker_images.git'
+        sh './build.py  --clean'
         sh './build.py  --distro rockylinux8'
       }
     }
@@ -31,6 +34,7 @@ pipeline {
       steps {
         git branch: 'ansible',
           url: 'https://github.com/resurgentech/docker_images.git'
+        sh './build.py  --clean'
         sh './build.py  --distro amazonlinux2'
       }
     }
@@ -38,3 +42,4 @@ pipeline {
 }
 
 # litedockerdedicated1 needs to have docker login run as the user
+# lets run this weekly H 1 * * 0
