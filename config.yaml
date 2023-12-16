@@ -34,6 +34,9 @@ templates:
         dev_base:
           template: ansible.debian.j2
           playbook: playbook-container-dev_base.yml
+        rust_build:
+          template: ansible.debian.j2
+          playbook: playbook-container-rust.yml
         kernel_build:
           template: ansible.debian.j2
           playbook: playbook-container-kernel_build.yml
