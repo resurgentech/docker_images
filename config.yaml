@@ -107,6 +107,9 @@ distros:
   ubuntu2204:
     root_image: ubuntu:22.04
     template: ubuntu_default
+  ubuntu2404:
+    root_image: ubuntu:24.04
+    template: ubuntu_default
   rockylinux8:
     root_image: rockylinux:8
     template: rockylinux_default
