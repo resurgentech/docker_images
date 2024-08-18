@@ -1,0 +1,14 @@
+services:
+  openbao:
+    image: resurgentech/openbao
+    ports:
+      - "0.0.0.0:8200:8200"
+      - "0.0.0.0:8201:8201"
+    volumes:
+      - file:/openbao/file
+      - config:/openbao/config
+    command: bao server -config /openbao/config/config.hcl
+
+volumes:
+  file:
+  config:
