@@ -21,3 +21,14 @@ To save them into openbao we're gonna need to run the following:
 
 And to retreive them:
 ```./build.sh --bao-read```
+
+# Bao configuration
+
+Following this guide:
+https://concourse-ci.org/vault-credential-manager.html#configuring-the-secrets-engine
+
+- create a secrets engine at /concourse
+- create RO policy for this engine
+- create a token for this policy
+- add "CONCOURSE_VAULT_CLIENT_TOKEN" to the Concourse Portainer stack named using the Editor under Environment Variable not the main text editor window
+
