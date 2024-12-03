@@ -1,7 +1,7 @@
 ---
 ansible:
   url: https://github.com/resurgentech/ansible.git
-  branch: testing2
+  branch: master
 templates:
   distros:
     debian_default:
@@ -11,10 +11,10 @@ templates:
           base_image: root_image
         dev_base:
           template: ansible.debian.j2
-          playbook: playbook-container-dev_base.yml
+          playbook: playbooks/container/dev_base.yml
         kernel_build:
           template: ansible.debian.j2
-          playbook: playbook-container-kernel_build.yml
+          playbook: playbooks/container/kernel_build.yml
     fedora_default:
       containers:
         base:
@@ -22,10 +22,10 @@ templates:
           base_image: root_image
         dev_base:
           template: ansible.redhat.j2
-          playbook: playbook-container-dev_base.yml
+          playbook: playbooks/container/dev_base.yml
         kernel_build:
           template: ansible.redhat.j2
-          playbook: playbook-container-kernel_build.yml
+          playbook: playbooks/container/kernel_build.yml
     ubuntu_default:
       containers:
         base:
@@ -33,16 +33,13 @@ templates:
           base_image: root_image
         dev_base:
           template: ansible.debian.j2
-          playbook: playbook-container-dev_base.yml
+          playbook: playbooks/container/dev_base.yml
         rust_build:
           template: ansible.debian.j2
-          playbook: playbook-container-rust.yml
+          playbook: playbooks/container/rust.yml
         kernel_build:
           template: ansible.debian.j2
-          playbook: playbook-container-kernel_build.yml
-        qt5_dev:
-          template: ansible.debian.j2
-          playbook: playbook-container-qt5_dev.yml
+          playbook: playbooks/container/kernel_build.yml
     rockylinux_default:
       containers:
         base:
@@ -50,10 +47,10 @@ templates:
           base_image: root_image
         dev_base:
           template: ansible.redhat.j2
-          playbook: playbook-container-dev_base.yml
+          playbook: playbooks/container/dev_base.yml
         kernel_build:
           template: ansible.redhat.j2
-          playbook: playbook-container-kernel_build.yml
+          playbook: playbooks/container/kernel_build.yml
     almalinux_default:
       containers:
         base:
@@ -61,10 +58,10 @@ templates:
           base_image: root_image
         dev_base:
           template: ansible.redhat.j2
-          playbook: playbook-container-dev_base.yml
+          playbook: playbooks/container/dev_base.yml
         kernel_build:
           template: ansible.redhat.j2
-          playbook: playbook-container-kernel_build.yml
+          playbook: playbooks/container/kernel_build.yml
     amazonlinux2_default:
       containers:
         base:
@@ -72,13 +69,10 @@ templates:
           base_image: root_image
         dev_base:
           template: ansible.amazonlinux2.j2
-          playbook: playbook-container-dev_base.yml
+          playbook: playbooks/container/dev_base.yml
         kernel_build:
           template: ansible.amazonlinux2.j2
-          playbook: playbook-container-kernel_build.yml
-        qt5_dev:
-          template: ansible.amazonlinux2.j2
-          playbook: playbook-container-qt5_dev.yml
+          playbook: playbooks/container/kernel_build.yml
 distros:
   debian10:
     root_image: debian:10

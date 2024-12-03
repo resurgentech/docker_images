@@ -6,7 +6,7 @@ RUN apt-get update --fix-missing && \
     git clone {{ ansible['url'] }} ansible && \
     cd /tmp/ansible && \
     git checkout {{ ansible['branch'] }} && \
-    ansible-playbook --connection=local -e 'ansible_python_interpreter=/usr/bin/python3' -i inventory-localhost.yml {{ playbook }} && \
+    ANSIBLE_HACKS="--extra-vars='ansible_user=root'" ./run targets {{ playbook }} inventories/localhost.yml --localhost --upgrade && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
