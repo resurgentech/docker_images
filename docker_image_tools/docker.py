@@ -62,7 +62,7 @@ def dockerfile_get_base_image(path):
 
 
 def docker_get_all_images():
-    cmd = "docker images -a"
+    cmd = "docker images --all --format table"
     _, out, _ = run_cmd(cmd, verbose=False, live_output=False)
     images = []
     lines = out.splitlines()
@@ -127,4 +127,3 @@ def docker_cleanup_images(start_images):
         if image['TAG'] == "<none>":
             print("Clean image '{}:{}' image hash '{}'".format(image['REPOSITORY'], image['TAG'], image['IMAGE']))
             docker_delete_image(image['IMAGE'])
-

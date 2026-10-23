@@ -1,6 +1,9 @@
 # docker_images
 Public docker images
 
+## Setup
+Requires [uv](https://docs.astral.sh/uv/). Dependencies are declared in `pyproject.toml` and pinned in `uv.lock`; `./build.py` (or `uv run build.py`) creates `.venv` and syncs it automatically.
+
 ## Usage
 ```
 ./build.py --container dev_base --os centos8
