@@ -1,0 +1,13 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+# Update basic system packages
+RUN pacman -Syu --noconfirm && \
+    pacman -S --noconfirm --needed git ansible python && \
+    pacman -Scc --noconfirm
+
+ARG ORG IMAGE BASE_IMAGE CREATED GIT_URL GIT_SHA
+RUN --mount=type=bind,source=scripts/image-history.sh,target=/tmp/image-history.sh \
+    sh /tmp/image-history.sh

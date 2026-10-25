@@ -1,0 +1,14 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+# Update basic system packages
+RUN dnf clean all && \
+    dnf update -y && \
+    dnf install -y git && \
+    dnf install -y ansible && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
+
+ARG ORG IMAGE BASE_IMAGE CREATED GIT_URL GIT_SHA
+RUN --mount=type=bind,source=scripts/image-history.sh,target=/tmp/image-history.sh \
+    sh /tmp/image-history.sh

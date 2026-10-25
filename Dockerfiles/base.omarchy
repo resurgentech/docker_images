@@ -1,0 +1,16 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+# Arch plus the [omarchy] repo, appended after the stock repos so it only adds
+# packages such as linux-omarchy. TrustAll is acceptable for a build image
+# only; never copy this into a client's pacman.conf.
+RUN printf '\n[omarchy]\nSigLevel = Optional TrustAll\nServer = https://pkgs.omarchy.org/stable/$arch\n' >> /etc/pacman.conf && \
+    pacman -Syu --noconfirm && \
+    pacman -S --noconfirm --needed git ansible python && \
+    pacman -Scc --noconfirm
+
+ARG ORG IMAGE BASE_IMAGE CREATED GIT_URL GIT_SHA
+RUN --mount=type=bind,source=scripts/image-history.sh,target=/tmp/image-history.sh \
+    sh /tmp/image-history.sh
