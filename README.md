@@ -51,9 +51,9 @@ Every build runs without the build cache, against the upstream images' current d
 ### Containers
 - `base`: the upstream root image with updates applied
 - `dev_base`: adds development tools / build-essential
-- `kernel_build`: everything needed to build the kernel and full OS kernel packages, with the distro's own kernel toolchain (including its Rust)
-- `rust_build`: adds the latest Rust toolchain from rustup, cargo-deb, cargo-generate-rpm and the musl target
-- `latest_kernel_build`: `rust_build` plus `kernel_build`'s packages and the kernel's Rust requirements (rust-src, bindgen-cli), for building the latest upstream kernel tree (Ubuntu 26.04 only)
+- `kernel_build`: everything needed to build the kernel and full OS kernel packages, with the distro's own kernel toolchain (including its Rust), and `just`
+- `rust_build`: adds the latest Rust toolchain from rustup, cargo-deb, cargo-generate-rpm, the musl target and `just`
+- `latest_kernel_build`: `rust_build` plus `kernel_build`'s packages and the kernel's Rust requirements (rust-src, bindgen-cli) and `just`, for building the latest upstream kernel tree (Ubuntu 26.04 only)
 
 ```
 base → dev_base ─┬→ kernel_build
